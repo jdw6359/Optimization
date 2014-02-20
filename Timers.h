@@ -81,9 +81,39 @@ printf("\nTimer Started\n");						\
 {									\
 /* Reset the elapsed time to zero */					\
 A.Elapsed=0;								\
-printf("\nTimer reset!\n");							\
+printf("\nTimer reset!\n");						\
 } /* RESET_TIMER(A) */
 
+/************************************************************************
+* Stop the timer. Set the stop time, print an error message if the timer
+* is already stopped otherwise accumulate the elapsed time (works for
+* both one-time and repeating timing operations), set the state to stopped
+************************************************************************/
+#define STOP_TIMER(A)							\
+{									\
+/* Set the stop time, done first to maximiza accuracy */		\
+A.Stop=clock();								\
+/* It is an error if the timer is currently stopped */			\
+if(0 == A.State)							\
+fprintf(stderr,"Error, stopped timer "#A" stopped again.\n");		\
+else /* Accumulate running and total only if previously running */	\
+A.Elapsed+=A.Stop - A.Start;						\
+/* Set the state to stopped */						\
+A.State=0;								\
+printf("\nTimer Stopped!\n");						\
+} /* STOP_TIMER() */
+
+/*************************************************************************
+* Print the timer. Check the timer state and stop it if necessary, print
+* the elapsed time (in seconds).
+*************************************************************************/
+#define PRINT_TIMER(A)							\
+{ 									\
+/* Stop the timer (silently) if it is currently running */ 		\
+if(1 == A.State) 							\
+STOP_TIMER(A); /* no error possible in this case */ 			\
+fprintf(stderr, "Elapsed CPU Time ("#A") = %g sec.\n",(double)A.Elapsed / (double)CLOCKS_PER_SEC); \
+} /* PRINT_TIMER */
 
 
 
