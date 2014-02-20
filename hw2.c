@@ -14,7 +14,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "data.h"
 #include "DynamicArrays.h"
 
 #define INITIAL_CAPACITY 0
@@ -59,51 +58,64 @@ void ComputeCoefficients(double *A, double *B, DArray *DArrayPtr){
 int main(int argc, char *argv[]){
 
 	/* Check to make sure there are no additional cmdline args */
-	if(argc < 2){
+	if(argc==2){
 
-		/* Initialize double values X and Y that will store the point values
-		returned from the call to Data Points */
-		double X, Y;
+		/* Declare FILE variable */
+		FILE* dFile;
 
-		/* Initialize double values A and B that represent the coefficients for
-		the line of best fit. Passed into ComputeCoefficients by refence */
-		double A, B;
+		/* Attempt to open file provided in command line arg */
+		dFile=fopen(argv[1],"r");
 
-		/* Variable that represents the index of the last element added to Payload  */
+		/* Check to make sure file was opened properly */
+		if(dFile==NULL){
+			/* Alert user that there was an issue opening file */
+			printf("File cannot be opened\n");
+		}else{
+			/* File was opened properly, perform calculations */
 
-		/* Initialize variable for Dynamic Array */
-		DArray array;
+			/* Initialize double values X and Y that will store the point values
+			returned from the call to Data Points */
+			double X, Y;
 
-		/* Call CreateDArray to initialize array */
-		CreateDArray(&array, INITIAL_CAPACITY);
+			/* Initialize double values A and B that represent the coefficients for
+			the line of best fit. Passed into ComputeCoefficients by refence */
+			double A, B;
 
-		/* Gather X and Y values while DataPoints() supplies values */
-		while (DataPoints(&X, &Y)==1){
+			/* Variable that represents the index of the last element added to Payload  */
+
+			/* Initialize variable for Dynamic Array */
+			DArray array;
+
+			/* Call CreateDArray to initialize array */
+			CreateDArray(&array, INITIAL_CAPACITY);
+
 
 			/* Initialize Data Object With values from DataPoints function */
 			Data point;
-			point.X=X;
-			point.Y=Y;
+			point.X=3.567;
+			point.Y=23.6789;
+
 
 			/* Send the data point to the dynamic array */
 			PushToDArray(&array, &point);
 
-		}
 
-		/* Compute the coefficients (Stores both A AND B) */
-		ComputeCoefficients(&A, &B, &array);
+			/* Compute the coefficients (Stores both A AND B) */
+			ComputeCoefficients(&A, &B, &array);
 
-		/* Produce Output */
-		printf("\nThe line is: Y = %f * X + %f\n", A, B);
-		printf("There were %d points in the data set\n\n", array.EntriesUsed);
+			/* Produce Output */
+			printf("\nThe line is: Y = %f * X + %f\n", A, B);
+			printf("There were %d points in the data set\n\n", array.EntriesUsed);
 
-		/* Destroy the DArray object, and free associated memory */
-		DestroyDArray(&array);
+			/* Destroy the DArray object, and free associated memory */
+			DestroyDArray(&array);
+
+		} /* End check for file being opened */
 
 	}else{
 
 		/* Improper amount of cmdline args entered, alert user */
-		printf("\nUsage: %s\n\n", argv[0]);
+		printf("\nUsage: %s <TextFile>.txt\n\n", argv[0]);
 
 	}
 	/* End Cmdline args check */
