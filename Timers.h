@@ -54,88 +54,38 @@
 	/* Stop = */ 0, 						\
 	/* Elapsed = */ 0, 						\
 	/* State = */ 0, 						\
-	}; /* Timer has been declared and defined */
+	}; /* Timer has been declared and defined */			\
+	printf("\nTimer Instantiated\n");
 
 /************************************************************************
-* Start the timer. Print an error if it is already running, set the
-* stare to running and then start the timer
+* Start the timer. Print an error if it is already running, set
+* the state to running and then start the timer
 ************************************************************************/
-
 #define START_TIMER(A)							\
-	{								\
-	/* It is an error if the timer is currently runniny */		\
-	if(1 == A.State)						\
-	fprintf(stderr, "Error, running "#A " timer  started.");
-	/* Set the state to running */					\
-	A.State=1;							\
-	/* Set the start time, done last to maximize accuracy */	\
-	A.Start=clock();						\
-	} /* START_TIMER() */
+{									\
+/* It is an error if the timer is currently running */			\
+if(1 == A.State)							\
+	fprintf(stderr, "Error, running timer "#A" started.\n");	\
+/* Set the state to running */						\
+A.State=1;								\
+/* Set the start time, done last to maximize accuracy */		\
+A.Start=clock();							\
+printf("\nTimer Started\n");						\
+} /* START_TIMER() */							\
+
 
 /************************************************************************
-* Reset the timer. Clear the elapsed time
+* Reset the timer. Clear the elapsed time.
 ************************************************************************/
 #define RESET_TIMER(A)							\
 {									\
 /* Reset the elapsed time to zero */					\
 A.Elapsed=0;								\
-} /* RESET_TIMER() */
-
-/************************************************************************
-* Stop the timer. Set the stop time, print an error message if the
-* timer is already stopped, otherwise accumulate the elapsed time
-* (works for both one-time and repeating timing operations), set
-* the state to stopped
-************************************************************************/
-#define STOP_TIMER(A)							\
-{									\
-/* Set the stop time, done first to maximize accuracy */		\
-A.Stop=clock();								\
-/* It is an error if the timer is currently stopped */			\
-if(0==A.State)								\
-	fprintf(stderr, "Error, stopped timer "#A"stopped again.\n");
-else /* Accumulate running total only if previously running */		\
-	A.Elapsed +=A.Stop -A.Start;					\
-/* set the state to stopped */						\
-A.State=0;								\
-} /* STOP_TIME() */
-
-/************************************************************************
-* Print the timer. Check the timer state and stop it if necessary. print
-* the elapsed time (in seconds).
-************************************************************************/
-#define PRINT_TIMER(A)							\
-{									\
-/* Stop the timer (silently) if it is currently running */		\
-if(1==A.State)								\
-	STOP_TIMER(A) /* no error possible in this case */		\
-	fprintf(stderr, "Elapsed CPU Time ("#A") - %g sec.\n",
-	(double)A.Elapsed / (double)CLOCKS_PER_SEC);			\
-} /* PRINT_TIMER() */
-
-
-/***********************************************************************
-* End Non-Tribial Macro Definitions
-***********************************************************************/
-
-#else /* not defined(EN_TIME) */
-
-/* Declare null macros for error-free compilation */
-
-#define DECLARE_TIMER(A) /* Null Macro */
-#define START_TIMER(A) /* Null Macro */
-#define RESET_TIMER(A) /* Null Macro */
-#define STOP_TIMER(A) /* Null Macro */
-#define PRINT_TIMER(A) /* Null Macro */
+printf("\nTimer reset!\n");							\
+} /* RESET_TIMER(A) */
 
 
 
 
-
-
-
-
-
-#endif /* defining EN_TIME */
-#endif /* TIMERS_H_ */
-
+#endif /* Ifdefine EN_TIME */
+#endif /* Ifdefine TIMERS */
