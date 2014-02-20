@@ -116,6 +116,15 @@ fprintf(stderr, "Elapsed CPU Time ("#A") = %g sec.\n",(double)A.Elapsed / (doubl
 } /* PRINT_TIMER */
 
 
+#else /* not defined(EN_TIME) */
+
+/* Declare null macros for error-free compilcation */
+#define DECLARE_TIMER(A)
+#define START_TIMER(A)
+#define RESET_TIMER(A)
+#define STOP_TIMER(A)
+#define PRINT_TIMER(A)
+
 
 #endif /* Ifdefine EN_TIME */
 #endif /* Ifdefine TIMERS */
