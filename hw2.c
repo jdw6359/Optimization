@@ -16,7 +16,8 @@
 #include <stdlib.h>
 #include "DynamicArrays.h"
 
-#define INITIAL_CAPACITY 0
+#define INITIAL_CAPACITY (0)
+#define NUM_ITERATIONS (10000)
 
 /* Function that will compute and store the coefficients A and B
    Function is passed a reference to A and B, as well as a reference
@@ -73,42 +74,56 @@ int main(int argc, char *argv[]){
 		}else{
 			/* File was opened properly, perform calculations */
 
-			/* Initialize double values X and Y that will store the point values
-			returned from the call to Data Points */
+			/* Declare Timer */
+
+			/* Initialize double values X and Y that will store the
+			values found with scanf  */
 			double X, Y;
 
 			/* Initialize double values A and B that represent the coefficients for
 			the line of best fit. Passed into ComputeCoefficients by refence */
 			double A, B;
 
-			/* Variable that represents the index of the last element added to Payload  */
+			/* Loop Control Variable */
+			int lcv;
 
-			/* Initialize variable for Dynamic Array */
-			DArray array;
+			/* Start the counter */
 
-			/* Call CreateDArray to initialize array */
-			CreateDArray(&array, INITIAL_CAPACITY);
+			for(lcv=0;lcv<NUM_ITERATIONS;lcv++){
+
+				/* Initialize variable for Dynamic Array */
+				DArray array;
+
+				/* Call CreateDArray to initialize array */
+				CreateDArray(&array, INITIAL_CAPACITY);
+
+				while(fscanf(dFile, "%lf %lf", &X, &Y) == 2){
+					/* Initialize Data Object With values from DataPoints function */
+					Data point;
+					point.X=X;
+					point.Y=Y;
+
+					/* Send the data point to the dynamic Array */
+					PushToDArray(&array, &point);
+
+				}/* End While */
+
+				/* Compute the coefficients (Stores both A AND B) */
+				ComputeCoefficients(&A, &B, &array);
 
 
-			/* Initialize Data Object With values from DataPoints function */
-			Data point;
-			point.X=3.567;
-			point.Y=23.6789;
 
 
-			/* Send the data point to the dynamic array */
-			PushToDArray(&array, &point);
+				/* Destroy the DArray object, and free associated memory */
+				DestroyDArray(&array);
+			}/* end NUM_ITERATIONS for */
 
+			/* Stop the timer */
 
-			/* Compute the coefficients (Stores both A AND B) */
-			ComputeCoefficients(&A, &B, &array);
 
 			/* Produce Output */
 			printf("\nThe line is: Y = %f * X + %f\n", A, B);
-			printf("There were %d points in the data set\n\n", array.EntriesUsed);
 
-			/* Destroy the DArray object, and free associated memory */
-			DestroyDArray(&array);
 
 		} /* End check for file being opened */
 
