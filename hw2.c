@@ -41,7 +41,6 @@ void ComputeCoefficients(double *A, double *B, DArray *DArrayPtr){
 		S_XY += DArrayPtr -> Payload[counter].X * DArrayPtr -> Payload[counter].Y;
 		S_X += DArrayPtr -> Payload[counter].X;
 		S_Y += DArrayPtr -> Payload[counter].Y;
-		printf("X: %lf     Y: %lf\n",DArrayPtr -> Payload[counter].X,DArrayPtr -> Payload[counter].Y);
 
 
 	}

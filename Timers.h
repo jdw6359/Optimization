@@ -13,7 +13,7 @@
 #define _TIMERS_H_
 
 
-#define NUM_ITERATIONS (1)
+#define NUM_ITERATIONS (1000)
 /*********************************************/
 /* The timers are enabled when the code      */
 /* is compiled. The following pre-processor  */
@@ -56,8 +56,7 @@
 	/* Stop = */ 0, 						\
 	/* Elapsed = */ 0, 						\
 	/* State = */ 0, 						\
-	}; /* Timer has been declared and defined */			\
-	printf("\nTimer Instantiated\n");
+	}; /* Timer has been declared and defined */
 
 /************************************************************************
 * Start the timer. Print an error if it is already running, set
@@ -72,8 +71,7 @@ if(1 == A.State)							\
 A.State=1;								\
 /* Set the start time, done last to maximize accuracy */		\
 A.Start=clock();							\
-printf("\nTimer Started\n");						\
-} /* START_TIMER() */							\
+} /* START_TIMER() */
 
 
 /************************************************************************
@@ -83,7 +81,6 @@ printf("\nTimer Started\n");						\
 {									\
 /* Reset the elapsed time to zero */					\
 A.Elapsed=0;								\
-printf("\nTimer reset!\n");						\
 } /* RESET_TIMER(A) */
 
 /************************************************************************
@@ -102,7 +99,6 @@ else /* Accumulate running and total only if previously running */	\
 A.Elapsed+=A.Stop - A.Start;						\
 /* Set the state to stopped */						\
 A.State=0;								\
-printf("\nTimer Stopped!\n");						\
 } /* STOP_TIMER() */
 
 /*************************************************************************
@@ -114,7 +110,7 @@ printf("\nTimer Stopped!\n");						\
 /* Stop the timer (silently) if it is currently running */ 		\
 if(1 == A.State) 							\
 STOP_TIMER(A); /* no error possible in this case */ 			\
-printf("Time Per Calulation: ("#A") = %g msec.\n",(double)A.Elapsed/(double)CLOCKS_PER_SEC / (double)NUM_ITERATIONS * 1000); \
+printf("Time Per Calulation: ("#A") = %g msec.\n\n",(double)A.Elapsed/(double)CLOCKS_PER_SEC / (double)NUM_ITERATIONS * 1000); \
 } /* PRINT_TIMER */
 
 

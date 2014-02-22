@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
       STOP_TIMER(DataTimer);
 
       // Print out the line that fits the data set.
-      cout << "The line is: Y = " << A << " * X + " << B << endl;
+      cout << "\nThe line is: Y = " << A << " * X + " << B << endl;
 
       // Print out elapsed time per iteration.
       PRINT_TIMER(DataTimer);
