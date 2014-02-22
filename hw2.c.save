@@ -40,13 +40,13 @@ void ComputeCoefficients(double *A, double *B, DArray *DArrayPtr){
 		S_XX += DArrayPtr -> Payload[counter].X * DArrayPtr -> Payload[counter].X;
 		S_XY += DArrayPtr -> Payload[counter].X * DArrayPtr -> Payload[counter].Y;
 		S_X += DArrayPtr -> Payload[counter].X;
-		S_Y += DArrayPtr -> Payload[counter].Y;
-		printf("X: %lf     Y: %lf\n",DArrayPtr -> Payload[counter].X,DArrayPtr -> Payload[counter].Y);
+		S_Y += DArrayPtr -> Payload[counter].X;
+		printf("X: %lf     Y: %lf",Payload[counter].X, Payload[counter].Y);
 
 
 	}
 	/* End for loop */
-
+dsaf
 
 	/* Compute the coefficients */
 	/* Compute the constant */
@@ -108,6 +108,7 @@ int main(int argc, char *argv[]){
 				while(fscanf(dFile, "%lf %lf", &X, &Y) == 2){
 					/* Initialize Data Object With values from DataPoints function */
 					Data point;
+					printf("X: %lf     Y: %lf\n",X,Y);
 					point.X=X;
 					point.Y=Y;
 
@@ -118,6 +119,7 @@ int main(int argc, char *argv[]){
 
 				/* Compute the coefficients (Stores both A AND B) */
 				ComputeCoefficients(&A, &B, &array);
+				printf("\nThe line is: Y = %f * X + %f\n", A, B);
 
 				/* Destroy the DArray object, and free associated memory */
 				DestroyDArray(&array);

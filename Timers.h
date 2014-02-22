@@ -12,6 +12,8 @@
 #ifndef _TIMERS_H_
 #define _TIMERS_H_
 
+
+#define NUM_ITERATIONS (1)
 /*********************************************/
 /* The timers are enabled when the code      */
 /* is compiled. The following pre-processor  */
@@ -112,7 +114,7 @@ printf("\nTimer Stopped!\n");						\
 /* Stop the timer (silently) if it is currently running */ 		\
 if(1 == A.State) 							\
 STOP_TIMER(A); /* no error possible in this case */ 			\
-fprintf(stderr, "Elapsed CPU Time ("#A") = %g sec.\n",(double)A.Elapsed / (double)CLOCKS_PER_SEC); \
+printf("Time Per Calulation: ("#A") = %g msec.\n",(double)A.Elapsed/(double)CLOCKS_PER_SEC / (double)NUM_ITERATIONS * 1000); \
 } /* PRINT_TIMER */
 
 

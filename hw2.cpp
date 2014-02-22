@@ -7,6 +7,7 @@
 #include <list>
 using namespace std;
 #include <iostream>
+#include "Timers.h"
 
 //////////////////////////////////////////////////////////////////////////////
 //  Class declaration for determining the "best" line for a given set of X-Y
@@ -151,11 +152,8 @@ int main(int argc, char *argv[])
    LinearFit *DataSet;
 
    // Constant defining the number of times to perform calculations
-#define NUM_ITERATIONS (10000)
 
-   // Program phase timing variables
-   clock_t StartTime, StopTime;
-
+   DECLARE_TIMER(DataTimer);
 
    // Check that a command line argument was provided
    if (argc != 1)
@@ -170,7 +168,7 @@ int main(int argc, char *argv[])
       double A, B;
 
       // Start the timer
-      StartTime = clock();
+      START_TIMER(DataTimer);
 
       // Perform the calculations many times
       for (int Iteration=0; Iteration < NUM_ITERATIONS; Iteration++)
@@ -218,19 +216,19 @@ int main(int argc, char *argv[])
        } // for()
 
       // Stop the timer
-      StopTime = clock();
+      STOP_TIMER(DataTimer);
 
       // Print out the line that fits the data set.
       cout << "The line is: Y = " << A << " * X + " << B << endl;
 
       // Print out elapsed time per iteration.
-      cout << "Time per calculation = " << double(StopTime - StartTime) / double(CLOCKS_PER_SEC) / double(NUM_ITERATIONS) * 1000.0 << " msec." << endl;
+      PRINT_TIMER(DataTimer);
      } // if()
    else
      {
       // Display program usage information
       cout << "Usage: " << argv[0] << " Filename" << endl;
      } // if...else()
-
+   RESET_TIMER(DataTimer);
    return 0;
   } // main()
