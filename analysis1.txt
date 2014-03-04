@@ -1,0 +1,76 @@
+Speed Analysis:
+
+Iterations=1000
+
+C Program:
+The line is: Y = 1.265397 * X + 0.339927
+Time Per Calulation: (DataTimer) = 3.45 msec.
+
+C++ Program:
+The line is: Y = 1.2654 * X + 0.339927
+Time Per Calulation: (DataTimer) = 8.92 msec.
+
+
+Iterations=2500
+
+C Program:
+The line is: Y = 1.265397 * X + 0.339927
+Time Per Calulation: (DataTimer) = 3.37 msec.
+
+C++ Program:
+The line is: Y = 1.2654 * X + 0.339927
+Time Per Calulation: (DataTimer) = 9.124 msec.
+
+
+Iterations=5000
+
+C Program:
+The line is: Y = 1.265397 * X + 0.339927
+Time Per Calulation: (DataTimer) = 3.43 msec.
+
+C++ Program:
+The line is: Y = 1.2654 * X + 0.339927
+Time Per Calulation: (DataTimer) = 9.172 msec.
+
+
+After running both programs for 1000, 2500, and 5000 iterations, it is 
+clear that the c program has a massive performance advantage over
+its c++ counterpart. In all scenarios, the c program takes between 3.37 
+and 3.45 ms to complete each iteration. In the case of the c++ program, 
+8.92 and 9.172 ms are the bounds for each iteration. 
+
+Size Analysis:
+
+Static Memory Use:
+
+
+C Program:
+
+   text	   data	    bss	    dec	    hex	filename
+ 793646	   6128	  11240	 811014	  c6006	hw2_c
+
+
+C++ Program:
+
+   text	   data	    bss	    dec	    hex	filename
+1309951	  10680	  94448	1415079	 1597a7	hw2_cpp
+
+After running the size executable on both the c and c++ programs, 
+it is clear that the c++ program has more of a cumbersome
+impact on the computers resources. 
+
+The text values of 1309951 and 793646 show that the c++ code (when 
+executed) contains almost double the machine code to be executed. 
+
+The data values of 10680 and 6128 show that the c++ program initializes
+and sets almost double the amount of memory as opposed to its c 
+counterpart.
+
+
+The bss values of 94448 and 11240 represent the amount of memory that each
+program itializes to a zero value. On top of the data value described above, 
+the c+ program needs to allocate almost 10x the memery of the c program. 
+The main reason for this is most likely the fact that the c++ program
+uses the list data structure where as the c program utilizes the dynamic 
+array, which does not require nearly as much memory to be initially 
+allocated. 

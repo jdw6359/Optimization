@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
       START_TIMER(DataTimer);
 
       // Perform the calculations many times
-      for (int Iteration=0; Iteration < NUM_ITERATIONS; Iteration++)
+      for (int Iteration=NUM_ITERATIONS; Iteration!=0; Iteration--)
         {
          // Attach the input stream to the command line argument (it should be a
          // filename).

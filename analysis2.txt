@@ -1,0 +1,39 @@
+C++ Code Optimization:
+
+Output from ls-l
+
+-rw-rw-r-- 1 jdw6359 jdw6359    2166 Feb 25 21:52 analysis1.txt
+-rw-rw-r-- 1 jdw6359 jdw6359     187 Feb 25 22:50 analysis2.txt
+-rwxrwxr-x 1 jdw6359 jdw6359  884246 Feb 25 20:58 a.out
+-rwxrwxr-x 1 jdw6359 jdw6359   84105 Feb 18 08:31 data.txt
+-rw-rw-r-- 1 jdw6359 jdw6359    2829 Feb 16 19:08 DynamicArrays.c
+-rw-rw-r-- 1 jdw6359 jdw6359    2648 Feb  9 17:32 DynamicArrays.h
+-rw-rw-r-- 1 jdw6359 jdw6359    2608 Feb 20 13:50 DynamicArrays.o
+-rwxrwxr-x 1 jdw6359 jdw6359  884246 Feb 22 18:23 hw2_c
+-rw-rw-r-- 1 jdw6359 jdw6359    3854 Feb 22 18:25 hw2.c
+-rwxrwxr-x 1 jdw6359 jdw6359 1616608 Feb 25 22:00 hw2_cpp
+-rwxrwxr-x 1 jdw6359 jdw6359    7548 Feb 25 22:46 hw2.cpp
+-rw-rw-r-- 1 jdw6359 jdw6359    4826 Feb 24 11:41 Timers.h
+
+After performing loop inversion
+
+The line is: Y = 1.2654 * X + 0.339927
+Time Per Calulation: (DataTimer) = 8.8 msec.
+
+
+The line is: Y = 1.2654 * X + 0.339927
+Time Per Calulation: (DataTimer) = 8.66 msec.
+
+
+The line is: Y = 1.2654 * X + 0.339927
+Time Per Calulation: (DataTimer) = 8.72 msec.
+
+The three outputs are from the c++ program after performing
+loop inversion. It is clear that the times of 8.8, 8.66, 8.72 ms are
+an improvement from the 8.92, 9.124, and 8.96ms that we achieved with
+the previous c++ program. 
+
+Other options for optimizing the c++ program would have been 
+to perform loop unraveling, yet that would have too complex of a 
+solution, and would have required that the size components of the 
+program would have been increased drastically. 

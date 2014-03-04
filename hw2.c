@@ -10,8 +10,6 @@
 /* Input is gathered from static txt file rather than Data_c.o  */
 /****************************************************************/
 
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "DynamicArrays.h"
@@ -42,10 +40,8 @@ void ComputeCoefficients(double *A, double *B, DArray *DArrayPtr){
 		S_X += DArrayPtr -> Payload[counter].X;
 		S_Y += DArrayPtr -> Payload[counter].Y;
 
-
 	}
 	/* End for loop */
-
 
 	/* Compute the coefficients */
 	/* Compute the constant */
@@ -54,10 +50,8 @@ void ComputeCoefficients(double *A, double *B, DArray *DArrayPtr){
 	/* Compute the linear coefficient */
 	*A = (((DArrayPtr->EntriesUsed * S_XY) - (S_X * S_Y)) / ((DArrayPtr->EntriesUsed * S_XX) - (S_X * S_X)));
 
-
 }
 /* End ComputerCoefficients() */
-
 
 /* Main method */
 int main(int argc, char *argv[]){
@@ -78,9 +72,6 @@ int main(int argc, char *argv[]){
 		}else{
 			/* File was opened properly, perform calculations */
 
-			/* Declare Timer */
-			DECLARE_TIMER(DataTimer);
-
 			/* Initialize double values X and Y that will store the
 			values found with scanf  */
 			double X, Y;
@@ -92,14 +83,18 @@ int main(int argc, char *argv[]){
 			/* Loop Control Variable */
 			int lcv;
 
+			/* Initialize variable for Dynamic Array */
+			DArray array;
+
+			/* Declare Timer */
+			DECLARE_TIMER(DataTimer);
+
 			/* Start the counter */
 			START_TIMER(DataTimer);
 
 			for(lcv=0;lcv<NUM_ITERATIONS;lcv++){
-				rewind(dFile);
 
-				/* Initialize variable for Dynamic Array */
-				DArray array;
+				rewind(dFile);
 
 				/* Call CreateDArray to initialize array */
 				CreateDArray(&array, INITIAL_CAPACITY);
@@ -124,7 +119,6 @@ int main(int argc, char *argv[]){
 
 			/* Stop the timer */
 			STOP_TIMER(DataTimer);
-
 
 			/* Produce Output */
 			printf("\nThe line is: Y = %f * X + %f\n", A, B);
